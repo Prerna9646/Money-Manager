@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Manage and understand your spending in Indian rupees."
+    />
+    <meta name="theme-color" content="#f5f7f5" />
+    <title>Money Manager — Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="main-content">
+        <header class="topbar">
+          <a class="brand" href="/" aria-label="Money Manager home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 34 34" fill="none">
+                <rect x="1" y="1" width="32" height="32" rx="11" fill="#CBF178" />
+                <path
+                  d="M9 24V10l8 9 8-9v14"
+                  stroke="#23301F"
+                  stroke-width="2.1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="brand-name">Money<span> Manager</span></span>
+          </a>
+          <nav class="main-nav" aria-label="Main navigation">
+            <button class="nav-link is-active" data-page="overview" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="3.5" width="7" height="7" rx="2" />
+                <rect x="13.5" y="3.5" width="7" height="4" rx="2" />
+                <rect x="13.5" y="11.5" width="7" height="9" rx="2" />
+                <rect x="3.5" y="14.5" width="7" height="6" rx="2" />
+              </svg>
+              Overview
+            </button>
+            <button class="nav-link" data-page="transactions" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 6.5h12m-12 5h12m-12 5h12M4 6.5h.01M4 11.5h.01M4 16.5h.01" />
+              </svg>
+              Transactions
+              <span class="nav-count" id="nav-count">—</span>
+            </button>
+          </nav>
+          <div class="topbar-actions">
+            <span class="today-label" id="today-label"></span>
+            <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh expenses" title="Refresh expenses">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 7v5h-5M4.6 9a7.5 7.5 0 0 1 13-2L20 12m-16 5v-5h5m10.4 3a7.5 7.5 0 0 1-13 2L4 12" />
+              </svg>
+            </button>
+            <button class="button button-primary top-add-button" data-open-modal type="button">
+              <span aria-hidden="true">+</span> Add expense
+            </button>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <div class="page-heading">
+            <div>
+              <h1 id="page-title">Overview</h1>
+            </div>
+          </div>
+
+          <div class="error-banner" id="error-banner" role="alert" hidden>
+            <span id="error-message"></span>
+            <button id="error-dismiss" type="button" aria-label="Dismiss error">×</button>
+          </div>
+
+          <section class="summary-grid" aria-label="Money manager summary">
+            <article class="summary-card total-card">
+              <div class="summary-card-top">
+                <div class="summary-label">Total expenses</div>
+                <span class="summary-icon total-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M12 3.5v17m5-13.5c0-1.6-2.2-3-5-3s-5 1.4-5 3 2 2.5 5 3 5 1.4 5 3.5-2.2 4-5 4-5-1.4-5-3" /></svg>
+                </span>
+              </div>
+              <div class="summary-value" id="total-expenses">—</div>
+              <div class="summary-footnote"><span class="metric-dot"></span> All time</div>
+              <div class="total-card-orbit" aria-hidden="true"></div>
+            </article>
+            <article class="summary-card">
+              <div class="summary-card-top">
+                <div class="summary-label">Transactions</div>
+                <span class="summary-icon transaction-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M7.5 4h9M7.5 8h9m-9 4h9m-9 4h5m-9-13h16v16h-16z" /></svg>
+                </span>
+              </div>
+              <div class="summary-value" id="transaction-count">—</div>
+              <div class="summary-footnote" id="transaction-caption">Expenses recorded</div>
+            </article>
+            <article class="summary-card">
+              <div class="summary-card-top">
+                <div class="summary-label">Average expense</div>
+                <span class="summary-icon average-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 17.5 9 12l4 4 7-9m-5 0h5v5" /></svg>
+                </span>
+              </div>
+              <div class="summary-value" id="average-expense">—</div>
+              <div class="summary-footnote">Per transaction</div>
+            </article>
+          </section>
+
+          <section class="insights-grid" aria-label="Spending insights in Indian rupees">
+            <article class="panel trend-panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Spending over time</h2>
+                </div>
+                <span class="panel-badge" id="trend-badge">Last 6 active months</span>
+              </div>
+              <div class="trend-total">
+                <span id="trend-total">—</span>
+              </div>
+              <div class="chart-area" id="chart-area">
+                <div class="chart-grid-lines" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <div class="chart-bars" id="chart-bars" role="img" aria-label="Monthly spending chart"></div>
+              </div>
+            </article>
+            <article class="panel category-panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Top categories</h2>
+                </div>
+              </div>
+              <div class="category-total">
+                <span id="category-total">—</span>
+              </div>
+              <div class="category-list" id="category-list"></div>
+            </article>
+          </section>
+
+          <section class="panel transactions-panel" aria-label="Recent transactions">
+            <div class="transactions-heading">
+              <div>
+                <h2 id="transactions-heading">Recent transactions <span class="heading-count" id="table-count">0</span></h2>
+              </div>
+              <div class="table-controls">
+                <label class="search-control">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3" /><path d="m15.5 15.5 4 4" /></svg>
+                  <input id="search-input" type="search" placeholder="Search expenses" autocomplete="off" />
+                </label>
+                <label class="filter-control">
+                  <span class="sr-only">Filter by category</span>
+                  <select id="category-filter">
+                    <option value="all">All categories</option>
+                  </select>
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+                </label>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr><th scope="col">DESCRIPTION</th><th scope="col">CATEGORY</th><th scope="col">DATE</th><th scope="col" class="amount-heading">AMOUNT</th><th scope="col" class="action-heading"><span class="sr-only">Actions</span></th></tr>
+                </thead>
+                <tbody id="transactions-body">
+                  <tr><td class="loading-cell" colspan="5"><span class="loading-spinner"></span> Loading your expenses…</td></tr>
+                </tbody>
+              </table>
+              <div class="empty-state" id="empty-state" hidden>
+                <span class="empty-state-icon" aria-hidden="true">⌕</span>
+                <strong>No expenses found</strong>
+                <span>Adjust search or category filters.</span>
+              </div>
+            </div>
+            <div class="table-footer">
+              <span id="table-footer-copy">Showing your latest expenses</span>
+              <div class="table-footer-actions">
+                <button class="text-button reset-button" id="reset-button" type="button" hidden>Reset expenses</button>
+                <button class="text-button" id="view-all-button" type="button">View all <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          </section>
+          <footer class="page-footer"><span>Amounts in INR.</span></footer>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+      <section class="expense-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-top">
+          <div>
+            <h2 id="modal-title">Add expense</h2>
+          </div>
+          <button class="icon-button modal-close" id="modal-close" type="button" aria-label="Close dialog">×</button>
+        </div>
+        <form id="expense-form">
+          <label class="form-field">
+            <span>Description</span>
+            <input id="expense-description" name="description" type="text" maxlength="160" placeholder="e.g. Lunch with friends" required />
+          </label>
+          <label class="form-field">
+            <span>Amount (INR)</span>
+            <div class="amount-input">
+              <span aria-hidden="true">₹</span>
+              <input id="expense-amount" name="amount" type="number" min="0.01" max="1000000000" step="0.01" placeholder="0.00" required />
+            </div>
+          </label>
+          <label class="form-field">
+            <span>Date</span>
+            <input id="expense-date" name="date" type="date" required />
+          </label>
+          <div class="form-error" id="form-error" role="alert" hidden></div>
+          <div class="modal-actions">
+            <button class="button button-secondary" id="cancel-button" type="button">Cancel</button>
+            <button class="button button-primary save-button" id="save-button" type="submit"><span aria-hidden="true">+</span> Save expense</button>
+          </div>
+        </form>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" hidden></div>
+  </body>
+</html>

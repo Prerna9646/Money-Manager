@@ -1,0 +1,38 @@
+{
+  "sourceCurrency": "PHP",
+  "targetCurrency": "INR",
+  "rate": 1.4923,
+  "rateDate": "2026-10-29",
+  "source": "https://api.frankfurter.dev/v1/latest?base=PHP&symbols=INR",
+  "rounding": "Convert each monetary value and round to the nearest 0.01 INR, half up.",
+  "scope": "Applied to expense amounts in all four CSV datasets; also applied to cash payments and signed credit balances in the credit dataset.",
+  "historicalNote": "One current reference rate was used for every transaction date; this is not historical date-specific FX accounting.",
+  "datasets": [
+    {
+      "path": "src/source-file.csv",
+      "records": 43,
+      "totalBeforePhp": 207813.85,
+      "totalAfterInr": 310120.64
+    },
+    {
+      "path": "qtgui/source-file.csv",
+      "records": 44,
+      "totalBeforePhp": 212813.85,
+      "totalAfterInr": 317582.14
+    },
+    {
+      "path": "update/source-file.csv",
+      "records": 40,
+      "totalBeforePhp": 182603.85,
+      "totalAfterInr": 272499.76
+    },
+    {
+      "path": "update/source-file-credit.csv",
+      "records": 12,
+      "totalBeforePhp": 209300.55,
+      "totalAfterInr": 312339.21,
+      "cashAfterInr": 178927.07,
+      "signedCreditBalanceAfterInr": 133412.14
+    }
+  ]
+}
